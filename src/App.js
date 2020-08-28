@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {makeStyles} from "@material-ui/core/styles";
+import AppBar from "./Components/NavigationBar/AppBar";
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import AllEvents from "./Components/Events/AllEvents/AllEvents";
+import AvailableEvents from "./Components/Events/AvailableEvents/AvailableEvents";
+import PastEvents from "./Components/Events/PastEvents/PastEvents";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
+}));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const classes = useStyles();
+    return (
+        <BrowserRouter>
+        <div className={classes.root}>,
+            <AppBar/>
+            <Switch>
+                <Route path={'/events'} component={AllEvents}/>
+                <Route path={'/available-events'} component={AvailableEvents}/>
+                <Route path={'/past-events'} component={PastEvents}/>
+            </Switch>
+        </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
